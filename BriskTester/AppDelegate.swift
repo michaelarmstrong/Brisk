@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Brisk
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,8 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
+        
+        var client : Client = Client()
+        
+        func testDictionaryFetch() {
+            
+            var anotherTestJSONURL = NSURL.URLWithString("https://api.prod.wordeo.com/api/v1/wordeos/popular.json")
+            client.dictionaryForURL(anotherTestJSONURL, completionHandler: {(response : NSURLResponse!, responseDictionary: NSDictionary!, error: NSError!) -> Void in
+                println("Response Dictionary: \(responseDictionary)")
+                
+                })
+        }
+        
+        func testStringFetch() {
+            var testURL = NSURL.URLWithString("http://www.google.com")
+            client.stringForURL(testURL, completionHandler: {(response : NSURLResponse!, responseString: NSString!, error: NSError!) -> Void in
+                println("Response Data: \(responseString)")
+                })
+        }
+        
+        testDictionaryFetch()
+        
         return true
     }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
