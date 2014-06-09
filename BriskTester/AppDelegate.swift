@@ -21,11 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var client : Client = Client()
         
         func testDictionaryFetch() {
-            
             var anotherTestJSONURL = NSURL.URLWithString("https://api.prod.wordeo.com/api/v1/wordeos/popular.json")
             client.dictionaryForURL(anotherTestJSONURL, completionHandler: {(response : NSURLResponse!, responseDictionary: NSDictionary!, error: NSError!) -> Void in
-                println("Response Dictionary: \(responseDictionary)")
-                
+                    if !error? {
+                        println("Response Dictionary: \(responseDictionary)")
+                    } else {
+                        println("Error : \(error)")
+                    }
                 })
         }
         
