@@ -24,41 +24,21 @@ class Client {
     
     typealias dataForURLCompletionClosure = ((NSURLResponse!, NSData!, NSError!) -> Void)!
     typealias stringForURLCompletionClosure = ((NSURLResponse!, NSString!, NSError!) -> Void)!
-    typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
     
     func dataForURL(url : NSURL, completionHandler handler: dataForURLCompletionClosure) {
         var request = NSURLRequest(URL:url)
-        var urlSession = NSURLSession.sessionWithConfiguration(sessionConfiguration, delegate: nil, delegateQueue: queue)
+        var urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
         
-        urlSession.dataTaskWithRequest(request, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
+        var sessionTask = urlSession.dataTaskWithRequest(request, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
             handler(response,data,error)
-        }
-        urlSession.resume()
+        })
+        sessionTask.resume()
     }
     
     func stringForURL(url : NSURL, completionHandler handler: stringForURLCompletionClosure) {
         dataForURL(url, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             handler(response,responseString,error)
-        })
-    }
-    
-    func dictionaryForURL(url : NSURL, completionHandler handler: dictionaryForURLCompletionClosure) {
-        dataForURL(url, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            
-            var resultDictionary = NSMutableDictionary()
-            var error : NSError?
-            var obj : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &error)
-            
-            switch obj {
-                case is NSArray:
-                    resultDictionary["content"] = obj
-                case is NSDictionary:
-                    resultDictionary = obj as NSMutableDictionary
-                default:
-                    resultDictionary["content"] = ""
-            }
-                handler(response,resultDictionary.copy() as NSDictionary,error)
         })
     }
 }
