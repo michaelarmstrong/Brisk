@@ -9,28 +9,33 @@
 import Foundation
 import Brisk
 
-typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
+extension Client {
+    
+    typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
+    
+    func dictionaryForURL(url : NSURL, completionHandler handler: dictionaryForURLCompletionClosure) {
+        dataForURL(url, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
 
-func dictionaryForURL(url : NSURL, completionHandler handler: dictionaryForURLCompletionClosure) {
-    Client.dataForURL(url, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-        
-        if error? {
+            if error? {
+                handler(response,nil,error)
+                return
+            }
+            
+            var resultDictionary = NSMutableDictionary()
+            var deserializationError : NSError?
+            
+            var obj : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
+            
+            switch obj {
+                case is NSArray:
+                    resultDictionary["content"] = obj
+                case is NSDictionary:
+                    resultDictionary = obj as NSMutableDictionary
+                default:
+                    resultDictionary["content"] = ""
+            }
             handler(response,resultDictionary.copy() as NSDictionary,error)
-            return
-        }
-        
-        var resultDictionary = NSMutableDictionary()
-        var error : NSError?
-        var obj : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &error)
-        
-        switch obj {
-        case is NSArray:
-            resultDictionary["content"] = obj
-        case is NSDictionary:
-            resultDictionary = obj as NSMutableDictionary
-        default:
-            resultDictionary["content"] = ""
-        }
-        handler(response,resultDictionary.copy() as NSDictionary,error)
-        })
+            })
+    }
+    
 }
