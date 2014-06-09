@@ -11,6 +11,7 @@
 		637332F419417CDC00767219 /* Brisk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637332E819417CDC00767219 /* Brisk.framework */; };
 		637332FB19417CDC00767219 /* BriskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637332FA19417CDC00767219 /* BriskTests.swift */; };
 		6373330619417D1C00767219 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373330519417D1C00767219 /* Client.swift */; };
+		638EFDB11945304500636B75 /* JSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638EFDB01945304500636B75 /* JSONExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		637332F919417CDC00767219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637332FA19417CDC00767219 /* BriskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriskTests.swift; sourceTree = "<group>"; };
 		6373330519417D1C00767219 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		638EFDB01945304500636B75 /* JSONExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		637332EA19417CDC00767219 /* Brisk */ = {
 			isa = PBXGroup;
 			children = (
+				638EFDAF19452FD700636B75 /* Extensions */,
 				6373330419417CE600767219 /* Client */,
 				637332ED19417CDC00767219 /* Brisk.h */,
 				637332EB19417CDC00767219 /* Supporting Files */,
@@ -111,6 +114,14 @@
 				6373330519417D1C00767219 /* Client.swift */,
 			);
 			name = Client;
+			sourceTree = "<group>";
+		};
+		638EFDAF19452FD700636B75 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				638EFDB01945304500636B75 /* JSONExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6373330619417D1C00767219 /* Client.swift in Sources */,
+				638EFDB11945304500636B75 /* JSONExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
