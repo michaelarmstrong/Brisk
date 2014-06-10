@@ -19,15 +19,11 @@ Built-ins
 **Brisk** comes with some convenience methods out the box and ready for you to use, additionally, included in the repo is an example project.
 
 Standard methods
-	class Client {
-    	 func dataForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.dataForURLCompletionClosure)
-   	 func stringForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.stringForURLCompletionClosure)
-	}
+`func dataForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.dataForURLCompletionClosure)`
+`func stringForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.stringForURLCompletionClosure)`
 
 An example extension for JSON
-	extension Brisk.Client {
-   	 func dictionaryForURL(url: NSURL, completionHandler handler: Brisk.Client.dictionaryForURLCompletionClosure)
-	}
+`func dictionaryForURL(url: NSURL, completionHandler handler: Brisk.Client.dictionaryForURLCompletionClosure)`
 
 
 > **Whats missing / todo:**
