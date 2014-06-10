@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6368D0C019453AB000FBF40C /* Brisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368D0BF19453AB000FBF40C /* Brisk.swift */; };
 		637332EE19417CDC00767219 /* Brisk.h in Headers */ = {isa = PBXBuildFile; fileRef = 637332ED19417CDC00767219 /* Brisk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		637332F419417CDC00767219 /* Brisk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637332E819417CDC00767219 /* Brisk.framework */; };
 		637332FB19417CDC00767219 /* BriskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637332FA19417CDC00767219 /* BriskTests.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6368D0BF19453AB000FBF40C /* Brisk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brisk.swift; sourceTree = "<group>"; };
 		637332E819417CDC00767219 /* Brisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Brisk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		637332EC19417CDC00767219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637332ED19417CDC00767219 /* Brisk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brisk.h; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6368D0BE19453AA500FBF40C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				6368D0BF19453AB000FBF40C /* Brisk.swift */,
+			);
+			name = Module;
+			sourceTree = "<group>";
+		};
 		637332DE19417CDC00767219 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 		637332EA19417CDC00767219 /* Brisk */ = {
 			isa = PBXGroup;
 			children = (
+				6368D0BE19453AA500FBF40C /* Module */,
 				638EFDAF19452FD700636B75 /* Extensions */,
 				6373330419417CE600767219 /* Client */,
 				637332ED19417CDC00767219 /* Brisk.h */,
@@ -232,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6368D0C019453AB000FBF40C /* Brisk.swift in Sources */,
 				6373330619417D1C00767219 /* Client.swift in Sources */,
 				638EFDB11945304500636B75 /* JSONExtension.swift in Sources */,
 			);

@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         
-        var client : Client = Client()
+        var client = Client()
+        // OR... var client2 = Brisk.client() 
         
         func testDictionaryFetch() {
             var anotherTestJSONURL = NSURL.URLWithString("https://api.prod.wordeo.com/api/v1/wordeos/popular.json")
