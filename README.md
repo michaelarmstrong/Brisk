@@ -18,6 +18,19 @@ Built-ins
 
 **Brisk** comes with some convenience methods out the box and ready for you to use, additionally, included in the repo is an example project.
 
+	class Client {
+   	 var queue: NSOperationQueue { get }
+   	 var sessionConfiguration: NSURLSessionConfiguration { get }
+    	 typealias dataForURLCompletionClosure = ((NSURLResponse!, NSData!, NSError!) -> Void)!
+    	 typealias stringForURLCompletionClosure = ((NSURLResponse!, NSString!, NSError!) -> Void)!
+    	 func dataForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.dataForURLCompletionClosure)
+   	 func stringForURL(url: NSURL, completionHandler handler: Brisk.Client.Type.stringForURLCompletionClosure)
+	}
+
+	extension Brisk.Client {
+    	 typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
+   	 func dictionaryForURL(url: NSURL, completionHandler handler: Brisk.Client.dictionaryForURLCompletionClosure)
+	}
 
 
 > **Whats missing / todo:**
