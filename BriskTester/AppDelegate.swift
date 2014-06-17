@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         testDictionaryFetch()
+        testStringFetch()
         
         return true
     }

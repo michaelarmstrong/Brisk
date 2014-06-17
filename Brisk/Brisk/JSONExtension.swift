@@ -9,6 +9,8 @@
 import Foundation
 import Brisk
 
+let kKeyContent = "content"
+
 extension Client {
     
     typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
@@ -28,11 +30,11 @@ extension Client {
             
             switch obj {
                 case is NSArray:
-                    resultDictionary["content"] = obj
+                    resultDictionary[kKeyContent] = obj
                 case is NSDictionary:
                     resultDictionary = obj as NSMutableDictionary
                 default:
-                    resultDictionary["content"] = ""
+                    resultDictionary[kKeyContent] = ""
             }
             handler(response,resultDictionary.copy() as NSDictionary,error)
             })
