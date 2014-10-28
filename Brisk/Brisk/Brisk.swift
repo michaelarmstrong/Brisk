@@ -11,7 +11,7 @@ import Foundation
 
 // superficially here for now...
 struct Brisk {
-    func client() -> Client {
-        return Client()
+    func client() -> BriskClient {
+        return BriskClient()
     }
 }
