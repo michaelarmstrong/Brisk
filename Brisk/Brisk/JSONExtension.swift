@@ -76,6 +76,18 @@ extension BriskClient {
                     handler(response,nil,error)
                 }
                 return
+            } else {
+                var resultDictionary = NSMutableDictionary()
+                switch dataObj {
+                case is NSArray:
+                    resultDictionary[kKeyContent] = dataObj
+                case is NSDictionary:
+                    resultDictionary = dataObj as NSMutableDictionary
+                default:
+                    resultDictionary[kKeyContent] = ""
+                }
+                handler(response,resultDictionary,error)
+                return
             }
         })
     }
