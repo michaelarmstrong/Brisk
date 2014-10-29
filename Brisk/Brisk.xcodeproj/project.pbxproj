@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6368D0C019453AB000FBF40C /* Brisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368D0BF19453AB000FBF40C /* Brisk.swift */; };
-		637332EE19417CDC00767219 /* Brisk.h in Headers */ = {isa = PBXBuildFile; fileRef = 637332ED19417CDC00767219 /* Brisk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		637332F419417CDC00767219 /* Brisk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637332E819417CDC00767219 /* Brisk.framework */; };
 		637332FB19417CDC00767219 /* BriskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637332FA19417CDC00767219 /* BriskTests.swift */; };
 		6373330619417D1C00767219 /* BriskClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373330519417D1C00767219 /* BriskClient.swift */; };
@@ -29,7 +28,6 @@
 		6368D0BF19453AB000FBF40C /* Brisk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brisk.swift; sourceTree = "<group>"; };
 		637332E819417CDC00767219 /* Brisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Brisk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		637332EC19417CDC00767219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		637332ED19417CDC00767219 /* Brisk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brisk.h; sourceTree = "<group>"; };
 		637332F319417CDC00767219 /* BriskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		637332F919417CDC00767219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637332FA19417CDC00767219 /* BriskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriskTests.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				6368D0BE19453AA500FBF40C /* Module */,
 				638EFDAF19452FD700636B75 /* Extensions */,
 				6373330419417CE600767219 /* Client */,
-				637332ED19417CDC00767219 /* Brisk.h */,
 				637332EB19417CDC00767219 /* Supporting Files */,
 			);
 			path = Brisk;
@@ -142,7 +139,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				637332EE19417CDC00767219 /* Brisk.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
