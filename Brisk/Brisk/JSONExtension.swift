@@ -27,17 +27,19 @@ extension BriskClient {
             var resultDictionary = NSMutableDictionary()
             var deserializationError : NSError?
             
-            var obj : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)!
+            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
             
-            switch obj {
-            case is NSArray:
-                resultDictionary[kKeyContent] = obj
-            case is NSDictionary:
-                resultDictionary = obj as NSMutableDictionary
-            default:
-                resultDictionary[kKeyContent] = ""
+            if let jsonObject: AnyObject = obj {
+                switch jsonObject {
+                case is NSArray:
+                    resultDictionary[kKeyContent] = jsonObject
+                case is NSDictionary:
+                    resultDictionary = jsonObject as NSMutableDictionary
+                default:
+                    resultDictionary[kKeyContent] = ""
+                }
+                handler(response,resultDictionary.copy() as NSDictionary,error)
             }
-            handler(response,resultDictionary.copy() as NSDictionary,error)
         })
     }
     
@@ -61,8 +63,13 @@ extension BriskClient {
             let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("Result String : \(resultString)")
             
+            if(data.length == 0){
+                handler(response,nil,error)
+                return
+            }
+            
             var deserializationError : NSError?
-            var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)!
+            var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
             
             if let resultObj = dataObj as? NSDictionary {
                 if let resultDictionary = resultObj["Content"] as? NSDictionary {
@@ -73,7 +80,20 @@ extension BriskClient {
                         handler(response,resultDictionary,error)
                         return
                     }
-                    handler(response,nil,error)
+                    
+                    var resultDictionary = NSMutableDictionary()
+                    switch dataObj {
+                    case is NSArray:
+                        resultDictionary[kKeyContent] = dataObj
+                    case is NSDictionary:
+                        resultDictionary = dataObj as NSMutableDictionary
+                    default:
+                        resultDictionary[kKeyContent] = ""
+                    }
+                    handler(response,resultDictionary,error)
+                    return
+                    
+                    // handler(response,nil,error)
                 }
                 return
             } else {
