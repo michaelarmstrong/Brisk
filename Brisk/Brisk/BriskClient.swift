@@ -40,7 +40,12 @@ class BriskClient: NSObject {
         var request = NSMutableURLRequest(URL:url)
         var urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
         request.HTTPMethod = "POST"
-        request.HTTPBody = postData
+        
+        if(postData.length != 0){
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = postData
+        }
+        
         
         let finalRequest = request.copy() as NSURLRequest
         var sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
