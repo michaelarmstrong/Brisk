@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Brisk
 import UIKit
 
 let kKeyContent = "content"
