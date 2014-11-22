@@ -42,6 +42,75 @@ extension BriskClient {
         })
     }
     
+    func dictionaryForRequest(request : NSURLRequest, postParams : NSDictionary, completionHandler handler: dictionaryForURLCompletionClosure) {
+     
+        var serializationError : NSError?
+        let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
+        
+        if(serializationError != nil){
+            handler(nil,nil,serializationError)
+        }
+        
+        dataForRequest(request, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        // TODO: Remove this MASSIVE amount of code duplication I just added and tidy up the almightly unneccesaryness of it.
+            if error != nil {
+                handler(response,nil,error)
+                return
+            }
+            
+            let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("Result String : \(resultString)")
+            
+            if(data.length == 0){
+                handler(response,nil,error)
+                return
+            }
+            
+            var deserializationError : NSError?
+            var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
+            
+            if let resultObj = dataObj as? NSDictionary {
+                if let resultDictionary = resultObj["Content"] as? NSDictionary {
+                    handler(response,resultDictionary,error)
+                } else {
+                    if let resultArray = resultObj["Content"] as? NSArray {
+                        let resultDictionary = [kKeyContent:resultArray]
+                        handler(response,resultDictionary,error)
+                        return
+                    }
+                    
+                    var resultDictionary = NSMutableDictionary()
+                    switch dataObj {
+                    case is NSArray:
+                        resultDictionary[kKeyContent] = dataObj
+                    case is NSDictionary:
+                        resultDictionary = dataObj as NSMutableDictionary
+                    default:
+                        resultDictionary[kKeyContent] = ""
+                    }
+                    handler(response,resultDictionary,error)
+                    return
+                    
+                    // handler(response,nil,error)
+                }
+                return
+            } else {
+                var resultDictionary = NSMutableDictionary()
+                switch dataObj {
+                case is NSArray:
+                    resultDictionary[kKeyContent] = dataObj
+                case is NSDictionary:
+                    resultDictionary = dataObj as NSMutableDictionary
+                default:
+                    resultDictionary[kKeyContent] = ""
+                }
+                handler(response,resultDictionary,error)
+                return
+            }
+        })
+
+    }
+    
     func dictionaryForURL(url : NSURL, postParams : NSDictionary, completionHandler handler: dictionaryForURLCompletionClosure) {
         var serializationError : NSError?
         let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
