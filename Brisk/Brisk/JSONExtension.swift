@@ -42,16 +42,31 @@ extension BriskClient {
         })
     }
     
-    func dictionaryForRequest(request : NSURLRequest, postParams : NSDictionary, completionHandler handler: dictionaryForURLCompletionClosure) {
+    func dictionaryForRequest(request : NSURLRequest, postParams : NSDictionary?, completionHandler handler: dictionaryForURLCompletionClosure) {
      
-        var serializationError : NSError?
-        let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
+        var urlRequest = request
         
-        if(serializationError != nil){
-            handler(nil,nil,serializationError)
+        if let postParams = postParams {
+            var serializationError : NSError?
+            let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
+            
+            if(serializationError != nil){
+                handler(nil,nil,serializationError)
+            }
+            
+            let mutableRequest = urlRequest.mutableCopy() as NSMutableURLRequest
+            mutableRequest.HTTPMethod = "POST"
+           
+            if let jsonData = jsonData {
+                mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                mutableRequest.HTTPBody = jsonData
+            }
+            urlRequest = mutableRequest.copy() as NSURLRequest
         }
         
-        dataForRequest(request, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+
+        
+        dataForRequest(urlRequest, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
         // TODO: Remove this MASSIVE amount of code duplication I just added and tidy up the almightly unneccesaryness of it.
             if error != nil {
                 handler(response,nil,error)
