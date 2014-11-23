@@ -59,7 +59,7 @@ extension BriskClient {
             if mutableRequest.HTTPMethod == "GET" {
                 mutableRequest.HTTPMethod = "POST"
             }
-                       
+
             if let jsonData = jsonData {
                 mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableRequest.HTTPBody = jsonData
@@ -78,11 +78,6 @@ extension BriskClient {
             
             let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("Result String : \(resultString)")
-            
-            if(data.length == 0){
-                handler(response,nil,error)
-                return
-            }
             
             var deserializationError : NSError?
             var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
@@ -149,10 +144,6 @@ extension BriskClient {
             let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("Result String : \(resultString)")
             
-            if(data.length == 0){
-                handler(response,nil,error)
-                return
-            }
             
             var deserializationError : NSError?
             var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
