@@ -55,8 +55,11 @@ extension BriskClient {
             }
             
             let mutableRequest = urlRequest.mutableCopy() as NSMutableURLRequest
-            mutableRequest.HTTPMethod = "POST"
-           
+            
+            if mutableRequest.HTTPMethod == "GET" {
+                mutableRequest.HTTPMethod = "POST"
+            }
+                       
             if let jsonData = jsonData {
                 mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableRequest.HTTPBody = jsonData
