@@ -77,7 +77,7 @@ extension BriskClient {
             }
             
             let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Result String : \(resultString)")
+            //println("Result String : \(resultString)")
             
             var deserializationError : NSError?
             var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
@@ -142,7 +142,7 @@ extension BriskClient {
             }
             
             let resultString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Result String : \(resultString)")
+            //println("Result String : \(resultString)")
             
             
             var deserializationError : NSError?
