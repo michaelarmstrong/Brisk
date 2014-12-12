@@ -37,8 +37,8 @@ extension BriskClient {
                 default:
                     resultDictionary[kKeyContent] = ""
                 }
-                handler(response,resultDictionary.copy() as NSDictionary,error)
             }
+            handler(response,resultDictionary.copy() as NSDictionary,error)
         })
     }
     
