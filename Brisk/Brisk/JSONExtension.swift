@@ -13,7 +13,7 @@ let kKeyContent = "content"
 
 extension BriskClient {
     
-    typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary!, NSError!) -> Void)!
+    typealias dictionaryForURLCompletionClosure = ((NSURLResponse!, NSDictionary?, NSError?) -> Void)!
     
     func dictionaryForURL(url : NSURL, completionHandler handler: dictionaryForURLCompletionClosure) {
         dataForURL(url, completionHandler: {(response : NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -38,7 +38,7 @@ extension BriskClient {
                     resultDictionary[kKeyContent] = ""
                 }
             }
-            handler(response,resultDictionary.copy() as NSDictionary,error)
+            handler(response,resultDictionary.copy() as? NSDictionary,error)
         })
     }
     
