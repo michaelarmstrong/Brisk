@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BriskClient: NSObject {
+class BriskClient: NSObject, NSURLSessionDelegate {
     
     var queue : NSOperationQueue {
         get {
@@ -28,7 +28,7 @@ class BriskClient: NSObject {
     
     func dataForURL(url : NSURL, completionHandler handler: dataForURLCompletionClosure) {
         var request = NSURLRequest(URL:url)
-        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
+        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: self, delegateQueue: queue)
         
         let sessionTask = urlSession.dataTaskWithRequest(request, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
             handler(response,data,error)
@@ -37,7 +37,7 @@ class BriskClient: NSObject {
     }
     
     func dataForRequest(request : NSURLRequest!, completionHandler handler: dataForURLCompletionClosure) {
-        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
+        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: self, delegateQueue: queue)
         
         let finalRequest = request.copy() as NSURLRequest
         let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
@@ -48,7 +48,7 @@ class BriskClient: NSObject {
     
     func dataForURL(url : NSURL, postData: NSData, completionHandler handler: dataForURLCompletionClosure) {
         let request = NSMutableURLRequest(URL:url)
-        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
+        let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: self, delegateQueue: queue)
         request.HTTPMethod = "POST"
         
         if(postData.length != 0){
@@ -71,4 +71,13 @@ class BriskClient: NSObject {
         })
     }
     
+    // MARK: NSURLSessionDelegate
+    
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            let credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust)
+            
+            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential,credential)
+        }
+    }
 }
