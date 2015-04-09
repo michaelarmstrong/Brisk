@@ -33,7 +33,7 @@ extension BriskClient {
                 case is NSArray:
                     resultDictionary[kKeyContent] = jsonObject
                 case is NSDictionary:
-                    resultDictionary = NSMutableDictionary(dictionary: jsonObject as NSDictionary)
+                    resultDictionary = NSMutableDictionary(dictionary: jsonObject as! NSDictionary)
                 default:
                     resultDictionary[kKeyContent] = ""
                 }
@@ -54,7 +54,7 @@ extension BriskClient {
                 handler(nil,nil,serializationError)
             }
             
-            let mutableRequest = urlRequest.mutableCopy() as NSMutableURLRequest
+            let mutableRequest = urlRequest.mutableCopy() as! NSMutableURLRequest
             
             if mutableRequest.HTTPMethod == "GET" {
                 mutableRequest.HTTPMethod = "POST"
@@ -64,7 +64,7 @@ extension BriskClient {
                 mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableRequest.HTTPBody = jsonData
             }
-            urlRequest = mutableRequest.copy() as NSURLRequest
+            urlRequest = mutableRequest.copy() as! NSURLRequest
         }
         
 
@@ -97,7 +97,7 @@ extension BriskClient {
                     case is NSArray:
                         resultDictionary[kKeyContent] = dataObj
                     case is NSDictionary:
-                        resultDictionary = NSMutableDictionary(dictionary: dataObj as NSDictionary)
+                        resultDictionary = NSMutableDictionary(dictionary: dataObj as! NSDictionary)
                     default:
                         resultDictionary[kKeyContent] = ""
                     }
@@ -113,7 +113,7 @@ extension BriskClient {
                 case is NSArray:
                     resultDictionary[kKeyContent] = dataObj
                 case is NSDictionary:
-                    resultDictionary = dataObj as NSMutableDictionary
+                    resultDictionary = dataObj as! NSMutableDictionary
                 default:
                     resultDictionary[kKeyContent] = ""
                 }
@@ -163,7 +163,7 @@ extension BriskClient {
                     case is NSArray:
                         resultDictionary[kKeyContent] = dataObj
                     case is NSDictionary:
-                        resultDictionary = NSMutableDictionary(dictionary: dataObj as NSDictionary)
+                        resultDictionary = NSMutableDictionary(dictionary: dataObj as! NSDictionary)
                     default:
                         resultDictionary[kKeyContent] = ""
                     }
@@ -179,7 +179,7 @@ extension BriskClient {
                 case is NSArray:
                     resultDictionary[kKeyContent] = dataObj
                 case is NSDictionary:
-                    resultDictionary = dataObj as NSMutableDictionary
+                    resultDictionary = dataObj as! NSMutableDictionary
                 default:
                     resultDictionary[kKeyContent] = ""
                 }

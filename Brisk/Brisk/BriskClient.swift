@@ -39,7 +39,7 @@ class BriskClient: NSObject {
     func dataForRequest(request : NSURLRequest!, completionHandler handler: dataForURLCompletionClosure) {
         let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: nil, delegateQueue: queue)
         
-        let finalRequest = request.copy() as NSURLRequest
+        let finalRequest = request.copy() as! NSURLRequest
         let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
             handler(response,data,error)
         })
@@ -57,7 +57,7 @@ class BriskClient: NSObject {
         }
         
         
-        let finalRequest = request.copy() as NSURLRequest
+        let finalRequest = request.copy() as! NSURLRequest
         let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
             handler(response,data,error)
         })
