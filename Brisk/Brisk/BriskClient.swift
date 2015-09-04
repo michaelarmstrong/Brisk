@@ -27,10 +27,10 @@ class BriskClient: NSObject, NSURLSessionDelegate {
     typealias stringForURLCompletionClosure = ((NSURLResponse!, NSString!, NSError!) -> Void)!
     
     func dataForURL(url : NSURL, completionHandler handler: dataForURLCompletionClosure) {
-        var request = NSURLRequest(URL:url)
+        let request = NSURLRequest(URL:url)
         let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: self, delegateQueue: queue)
         
-        let sessionTask = urlSession.dataTaskWithRequest(request, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
+        let sessionTask = urlSession.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response : NSURLResponse?, error: NSError?) -> Void in
             handler(response,data,error)
         })
         sessionTask.resume()
@@ -40,7 +40,7 @@ class BriskClient: NSObject, NSURLSessionDelegate {
         let urlSession = NSURLSession(configuration:sessionConfiguration, delegate: self, delegateQueue: queue)
         
         let finalRequest = request.copy() as! NSURLRequest
-        let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
+        let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData?, response : NSURLResponse?, error: NSError?) -> Void in
             handler(response,data,error)
         })
         sessionTask.resume()
@@ -58,7 +58,7 @@ class BriskClient: NSObject, NSURLSessionDelegate {
         
         
         let finalRequest = request.copy() as! NSURLRequest
-        let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData!, response : NSURLResponse!, error: NSError!) -> Void in
+        let sessionTask = urlSession.dataTaskWithRequest(finalRequest, completionHandler: {(data: NSData?, response : NSURLResponse?, error: NSError?) -> Void in
             handler(response,data,error)
         })
         sessionTask.resume()
@@ -73,9 +73,9 @@ class BriskClient: NSObject, NSURLSessionDelegate {
     
     // MARK: NSURLSessionDelegate
     
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            let credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust)
+            let credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
             
             completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential,credential)
         }

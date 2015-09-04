@@ -26,7 +26,15 @@ extension BriskClient {
             var resultDictionary = NSMutableDictionary()
             var deserializationError : NSError?
             
-            var obj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
+            var obj : AnyObject?
+            do {
+                obj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            } catch let error as NSError {
+                deserializationError = error
+                obj = nil
+            } catch {
+                fatalError()
+            }
             
             if let jsonObject: AnyObject = obj {
                 switch jsonObject {
@@ -48,7 +56,13 @@ extension BriskClient {
         
         if let postParams = postParams {
             var serializationError : NSError?
-            let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
+            let jsonData: NSData?
+            do {
+                jsonData = try NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted)
+            } catch let error as NSError {
+                serializationError = error
+                jsonData = nil
+            }
             
             if(serializationError != nil){
                 handler(nil,nil,serializationError)
@@ -80,7 +94,15 @@ extension BriskClient {
             //println("Result String : \(resultString)")
             
             var deserializationError : NSError?
-            var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
+            var dataObj : AnyObject?
+            do {
+                dataObj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            } catch let error as NSError {
+                deserializationError = error
+                dataObj = nil
+            } catch {
+                fatalError()
+            }
             
             if let resultObj = dataObj as? NSDictionary {
                 if let resultDictionary = resultObj["Content"] as? NSDictionary {
@@ -126,9 +148,15 @@ extension BriskClient {
     
     func dictionaryForURL(url : NSURL, postParams : NSDictionary, completionHandler handler: dictionaryForURLCompletionClosure) {
         var serializationError : NSError?
-        let jsonData = NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
+        let jsonData: NSData?
+        do {
+            jsonData = try NSJSONSerialization.dataWithJSONObject(postParams, options: NSJSONWritingOptions.PrettyPrinted)
+        } catch let error as NSError {
+            serializationError = error
+            jsonData = nil
+        }
         
-        println("Post Params \(postParams)")
+        print("Post Params \(postParams)")
         
         if(serializationError != nil){
             handler(nil,nil,serializationError)
@@ -146,7 +174,15 @@ extension BriskClient {
             
             
             var deserializationError : NSError?
-            var dataObj : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &deserializationError)
+            var dataObj : AnyObject?
+            do {
+                dataObj = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            } catch let error as NSError {
+                deserializationError = error
+                dataObj = nil
+            } catch {
+                fatalError()
+            }
             
             if let resultObj = dataObj as? NSDictionary {
                 if let resultDictionary = resultObj["Content"] as? NSDictionary {
