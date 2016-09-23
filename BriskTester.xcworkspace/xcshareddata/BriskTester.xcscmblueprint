@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CA35138B209E86289F2A119CA03024DCD8A79D3C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BAA8C0A11225D4CD3688C312DCCF05329898FB6A" : 0,
+    "CA35138B209E86289F2A119CA03024DCD8A79D3C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "083435F9-A5CE-4F3F-BF6B-2FDECC8E04C4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BAA8C0A11225D4CD3688C312DCCF05329898FB6A" : "..",
+    "CA35138B209E86289F2A119CA03024DCD8A79D3C" : "Brisk\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BriskTester",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BriskTester.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/stash.superarmstrong.uk:7990\/scm\/um\/ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BAA8C0A11225D4CD3688C312DCCF05329898FB6A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/michaelarmstrong\/Brisk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CA35138B209E86289F2A119CA03024DCD8A79D3C"
+    }
+  ]
+}
